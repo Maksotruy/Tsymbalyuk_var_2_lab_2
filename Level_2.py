@@ -20,6 +20,7 @@ while True:
             continue
 
         matrix = []
+
         for i in range(rows):
             matrix.append(numbers[i * cols:(i + 1) * cols])
 
@@ -30,8 +31,10 @@ while True:
 
 
 print("Двовимірний список:")
+
 for row in matrix:
     print(row)
+
 
 symmetric = True
 
