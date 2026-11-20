@@ -32,7 +32,9 @@ for i in range(attempts):
 
     while True:
         try:
-            data = input("Олена вводить числа через кому з пробілом або HELP: ").strip()
+            data = input(
+                "Олена вводить числа через кому з пробілом або HELP: "
+            ).strip()
 
             if data.upper() == "HELP":
                 print("Можливі числа:", *sorted(possible))
@@ -42,7 +44,13 @@ for i in range(attempts):
                 print("Помилка: введення порожнє.")
                 continue
 
-            numbers = set(map(int, data.split(",")))
+            parts = data.split(",")
+
+            if any(not x.strip() for x in parts):
+                print("Помилка: неправильний формат введення.")
+                continue
+
+            numbers = set(map(int, parts))
 
             if any(x < 1 or x > 100 for x in numbers):
                 print("Помилка: числа мають бути від 1 до 100.")
@@ -60,6 +68,10 @@ for i in range(attempts):
         print("No")
         possible -= numbers
 
+    if len(possible) == 1:
+        print("Загадане число знайдено:", *possible)
+        break
 
-print("HELP")
-print("Можливі числа:", *sorted(possible))
+else:
+    print("Кількість спроб вичерпано.")
+    print("Можливі числа:", *sorted(possible))
